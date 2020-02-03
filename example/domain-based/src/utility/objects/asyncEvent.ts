@@ -22,3 +22,15 @@ export type AsyncEvent<NameType, MetaType, ValueType> =
     | AsyncEventPending<NameType, MetaType>
     | AsyncEventReject<NameType, MetaType>
     | AsyncEventResolved<NameType, MetaType, ValueType>;
+
+export const createAsyncEvent = <NameType, MetaType, ValueType>(name: NameType, meta: MetaType): AsyncEvent<NameType, MetaType, ValueType> => ({
+    name,
+    status: 'PENDING',
+    meta
+})
+
+export const modifyAsyncEvent = <NameType, MetaType, ValueType>(event: AsyncEvent<NameType, MetaType, ValueType>) => ({
+    return() {
+        return event;
+    }
+})
