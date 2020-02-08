@@ -8,18 +8,18 @@ export const createTask = (): Task => ({
     done: false
 })
 
-export const modifyTask = (task: Task) => ({
-    done() {
+export const createTaskModifier = (task: Task) => ({
+    return() {
         return task
     },
     setDescription(nextValue: string)  {
-        return modifyTask({
+        return createTaskModifier({
             ...task,
             description: nextValue
         })
     },
-    setDoneToTrue() {
-        return modifyTask({
+    done() {
+        return createTaskModifier({
             ...task,
             done: true
         })

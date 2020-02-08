@@ -10,30 +10,30 @@ export const createUser = (): User => ({
     currentActivities: [],
 })
 
-export const modifyUser = (user: User) => ({
+export const createUserModifier = (user: User) => ({
     return() {
         return user
     },
     setFullName(nextValue: string)  {
-        return modifyUser({
+        return createUserModifier({
             ...user,
             fullName: nextValue
         })
     },
     setActivity(activity: UserActivity) {
-        return modifyUser({
+        return createUserModifier({
             ...user,
             currentActivities: [activity]
         })
     },
     addActivity(activity: UserActivity) {
-        return modifyUser({
+        return createUserModifier({
             ...user,
             currentActivities: [...user.currentActivities, activity]
         })
     },
     removeActivity(activity: UserActivity) {
-        return modifyUser({
+        return createUserModifier({
             ...user,
             currentActivities: user.currentActivities.filter(act => act !== activity)
         })

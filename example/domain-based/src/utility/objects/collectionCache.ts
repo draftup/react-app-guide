@@ -9,7 +9,7 @@ export const createCollectionCache = <IdType, ItemType>(): CollectionCache<IdTyp
     invalidatedIds: new Set()
 });
 
-export const modifyCollectionCache = <IdType, ItemType>(collectionCache: CollectionCache<IdType, ItemType>) => ({
+export const createCollectionCacheModifier = <IdType, ItemType>(collectionCache: CollectionCache<IdType, ItemType>) => ({
     return() {
         return collectionCache;
     },
@@ -18,7 +18,7 @@ export const modifyCollectionCache = <IdType, ItemType>(collectionCache: Collect
 
         nextInvalidatedIds.add(id);
 
-        return modifyCollectionCache({
+        return createCollectionCacheModifier({
             ...collectionCache,
             invalidatedIds: nextInvalidatedIds
         })
@@ -32,7 +32,7 @@ export const modifyCollectionCache = <IdType, ItemType>(collectionCache: Collect
 
         nextInvalidatedIds.delete(id);
 
-        return modifyCollectionCache({
+        return createCollectionCacheModifier({
             ...collectionCache,
             byId: nextById,
             invalidatedIds: nextInvalidatedIds

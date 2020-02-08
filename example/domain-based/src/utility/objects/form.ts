@@ -17,18 +17,18 @@ export const createForm = <ValuesType, ValidationErrorType>(initialValues: Value
     status: 'CREATED',
 });
 
-export const modifyForm = <ValuesType, ValidationErrorType>(form: Form<ValuesType, ValidationErrorType>) => ({
+export const createFormModifier = <ValuesType, ValidationErrorType>(form: Form<ValuesType, ValidationErrorType>) => ({
     return() {
         return form;
     },
     setValues(nextValues: ValuesType) {
-        return modifyForm({
+        return createFormModifier({
             ...form,
             values: nextValues,
         })
     },
     setValidationErrors(nextValidationErrors: ValidationErrorType[]) {
-        return modifyForm({
+        return createFormModifier({
             ...form,
             validationErrors: nextValidationErrors
         })
@@ -36,7 +36,7 @@ export const modifyForm = <ValuesType, ValidationErrorType>(form: Form<ValuesTyp
     setStatus(nextStatus: FormStatus) {
         validateFormStatusTransition(form.status, nextStatus);
 
-        return modifyForm({
+        return createFormModifier({
             ...form,
             status: nextStatus
         })

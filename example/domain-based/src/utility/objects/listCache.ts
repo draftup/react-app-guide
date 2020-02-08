@@ -8,7 +8,7 @@ export const createListCache = <ItemType>(): ListCache<ItemType> => ({
     invalidatedPages: new Set()
 });
 
-export const modifyListCache = <ItemType>(listCache: ListCache<ItemType>) => ({
+export const createListCacheModifier = <ItemType>(listCache: ListCache<ItemType>) => ({
     return() {
         return listCache;
     },
@@ -17,7 +17,7 @@ export const modifyListCache = <ItemType>(listCache: ListCache<ItemType>) => ({
 
         nextInvalidatedPages.add(page);
 
-        return modifyListCache({
+        return createListCacheModifier({
             ...listCache,
             invalidatedPages: nextInvalidatedPages
         })
@@ -31,7 +31,7 @@ export const modifyListCache = <ItemType>(listCache: ListCache<ItemType>) => ({
 
         nextInvalidatedPages.delete(page);
 
-        return modifyListCache({
+        return createListCacheModifier({
             ...listCache,
             byPage: nextByPage,
             invalidatedPages: nextInvalidatedPages

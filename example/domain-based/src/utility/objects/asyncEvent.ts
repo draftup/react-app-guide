@@ -29,7 +29,7 @@ export const createAsyncEvent = <NameType, MetaType, ValueType>(name: NameType, 
     meta
 })
 
-export const modifyAsyncEvent = <NameType, MetaType, ValueType>(event: AsyncEvent<NameType, MetaType, ValueType>) => ({
+export const createAsyncEventModifier = <NameType, MetaType, ValueType>(event: AsyncEvent<NameType, MetaType, ValueType>) => ({
     return() {
         return event;
     }

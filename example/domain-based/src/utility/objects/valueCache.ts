@@ -8,18 +8,18 @@ export const createValueCache = <ValueType>(initialValue: ValueType): ValueCache
     invalidated: false
 });
 
-export const modifyValueCache = <ValueType>(valueCache: ValueCache<ValueType>) => ({
+export const createValueCacheModifier = <ValueType>(valueCache: ValueCache<ValueType>) => ({
     return() {
         return valueCache;
     },
     invalidate() {
-        return modifyValueCache({
+        return createValueCacheModifier({
             ...valueCache,
             invalidated: true
         })
     },
     setValue(nextValue: ValueType) {
-        return modifyValueCache({
+        return createValueCacheModifier({
             ...valueCache,
             value: nextValue,
             invalidated: false
